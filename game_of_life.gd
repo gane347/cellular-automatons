@@ -240,24 +240,18 @@ func _draw():
 func _input(event):
 	# Toggle cells
 	if Input.is_mouse_button_pressed(1):
-		var x_pos = event.position.x
-		var y_pos = event.position.y
-		var top_ui_bound = 528;
-		var right_ui_bound = 776;
-		var left_ui_bound = 376;
-		if(!(x_pos > left_ui_bound and x_pos < right_ui_bound and y_pos > top_ui_bound)):
-			var x = int(x_pos / cell_size)
-			var y = int(y_pos / cell_size)
-			if x >= 0 and x < grid_width and y >= 0 and y < grid_height: 
-				match game_mode:
-					GameMode.CONWAY, GameMode.SEEDS, GameMode.RULE90, GameMode.RULE184, GameMode.DAY_NIGHT:
-						current_grid[x][y] = 2 - current_grid[x][y]
-					GameMode.BRIANS_BRAIN: 
-						if(current_grid[x][y] == 2):
-							current_grid[x][y] = 0
-						else: 
-							current_grid[x][y] = current_grid[x][y] + 1
-				queue_redraw()
+		var x = int(event.position.x / cell_size)
+		var y = int(event.position.y / cell_size)
+		if x >= 0 and x < grid_width and y >= 0 and y < grid_height: 
+			match game_mode:
+				GameMode.CONWAY, GameMode.SEEDS, GameMode.RULE90, GameMode.RULE184, GameMode.DAY_NIGHT:
+					current_grid[x][y] = 2 - current_grid[x][y]
+				GameMode.BRIANS_BRAIN: 
+					if(current_grid[x][y] == 2):
+						current_grid[x][y] = 0
+					else: 
+						current_grid[x][y] = current_grid[x][y] + 1
+			queue_redraw()
 	
 	# Keyboard controls
 	if event is InputEventKey and event.pressed:
