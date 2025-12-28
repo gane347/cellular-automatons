@@ -1,0 +1,172 @@
+[gd_scene load_steps=17 format=3 uid="uid://be0wkiqoamnjx"]
+
+[ext_resource type="Script" uid="uid://dkvuwtvywxa7d" path="res://game_of_life.gd" id="1_2q17r"]
+[ext_resource type="Texture2D" uid="uid://bv7prtl3fvnkn" path="res://DeadCell.png" id="2_a4or0"]
+[ext_resource type="Texture2D" uid="uid://c61hctudt2eys" path="res://window.png" id="2_bukwn"]
+[ext_resource type="Texture2D" uid="uid://dtwhylo4lc8kk" path="res://PlayButton.png" id="2_hwo8c"]
+[ext_resource type="Texture2D" uid="uid://dcnyylsedb8f3" path="res://PlayButtonActive.png" id="3_bukwn"]
+[ext_resource type="Texture2D" uid="uid://44gwnewjwpd5" path="res://StepButton.png" id="4_a54vt"]
+[ext_resource type="Texture2D" uid="uid://bs7exatjg4uws" path="res://StepButtonActive.png" id="5_jo6dn"]
+[ext_resource type="Texture2D" uid="uid://b1rqpid0i8a1k" path="res://ClearButton.png" id="6_a4or0"]
+[ext_resource type="Texture2D" uid="uid://dtb5um464ck5r" path="res://ClearButtonActive.png" id="7_7d50m"]
+[ext_resource type="Texture2D" uid="uid://cql5hfh30ks24" path="res://RandomButton.png" id="8_1r201"]
+[ext_resource type="Texture2D" uid="uid://cw60m0kv07fj7" path="res://RandomButtonActive.png" id="9_weubq"]
+[ext_resource type="FontFile" uid="uid://cql1e0cvjrk67" path="res://Tiny5-Regular.ttf" id="14_1r201"]
+[ext_resource type="Texture2D" uid="uid://bohj4avsea41p" path="res://button.png" id="14_7d50m"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_g23dx"]
+font = ExtResource("14_1r201")
+font_size = 15
+
+[sub_resource type="LabelSettings" id="LabelSettings_t5ki0"]
+font = ExtResource("14_1r201")
+font_size = 15
+
+[sub_resource type="LabelSettings" id="LabelSettings_bukwn"]
+font = ExtResource("14_1r201")
+font_size = 15
+
+[node name="Control" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1154.0
+offset_bottom = 650.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_a4or0")
+
+[node name="GameOfLife" type="Node2D" parent="."]
+script = ExtResource("1_2q17r")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -120.0
+offset_right = 200.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+texture = ExtResource("2_bukwn")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="PlayPause" type="TextureButton" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 28)
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("2_hwo8c")
+texture_pressed = ExtResource("3_bukwn")
+stretch_mode = 0
+
+[node name="Step" type="TextureButton" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 28)
+layout_mode = 2
+texture_normal = ExtResource("4_a54vt")
+texture_pressed = ExtResource("5_jo6dn")
+stretch_mode = 0
+
+[node name="Clear" type="TextureButton" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 28)
+layout_mode = 2
+texture_normal = ExtResource("6_a4or0")
+texture_pressed = ExtResource("7_7d50m")
+stretch_mode = 0
+
+[node name="Random" type="TextureButton" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 28)
+layout_mode = 2
+texture_normal = ExtResource("8_1r201")
+texture_pressed = ExtResource("9_weubq")
+stretch_mode = 0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Speed" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Speed:"
+label_settings = SubResource("LabelSettings_g23dx")
+
+[node name="SpeedSlider" type="HSlider" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+min_value = 1.0
+step = 0.01
+value = 10.0
+tick_count = 2
+ticks_position = 3
+
+[node name="RandomAmount" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Random Amount"
+label_settings = SubResource("LabelSettings_g23dx")
+
+[node name="RandomAmountSlider" type="HSlider" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+value = 0.5
+tick_count = 2
+ticks_position = 3
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="GenCounter" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+text = "_ generation"
+label_settings = SubResource("LabelSettings_t5ki0")
+horizontal_alignment = 1
+
+[node name="GameMode" type="MenuButton" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("14_1r201")
+text = "Conway's Life"
+icon = ExtResource("14_7d50m")
+icon_alignment = 1
+
+[node name="PopupMenu" type="PopupMenu" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer3/GameMode"]
+oversampling_override = 1.0
+
+[node name="Scale" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+text = "Scale:"
+label_settings = SubResource("LabelSettings_bukwn")
+
+[node name="ScaleSlider" type="HSlider" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 4
+min_value = 40.0
+max_value = 640.0
+step = 16.0
+value = 160.0
+
+[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer/PlayPause" to="GameOfLife" method="_on_play_button_pressed"]
+[connection signal="toggled" from="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer/PlayPause" to="GameOfLife" method="_on_play_button_toggled"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer/Step" to="GameOfLife" method="_on_step_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer/Clear" to="GameOfLife" method="_on_clear_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer/Random" to="GameOfLife" method="_on_random_button_pressed"]
+[connection signal="value_changed" from="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer2/SpeedSlider" to="GameOfLife" method="_on_h_slider_value_changed"]
+[connection signal="value_changed" from="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer2/RandomAmountSlider" to="GameOfLife" method="_on_random_amount_slider_value_changed"]
+[connection signal="value_changed" from="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer3/ScaleSlider" to="GameOfLife" method="_on_scale_slider_value_changed"]
