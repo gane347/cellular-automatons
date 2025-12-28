@@ -5,7 +5,7 @@ var game_mode = GameMode.CONWAY
 @onready var scale_slider =  $"../CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer3/ScaleSlider"
 @onready var gen_counter = $"../CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer3/GenCounter"
 
-var grid_width = 160
+var grid_width = 190
 var grid_height = 90
 var cell_size = 7.2
 
@@ -29,7 +29,13 @@ func _ready():
 	popup.add_item("Rule 90", GameMode.RULE90)
 	popup.add_item("Rule 184", GameMode.RULE184)
 	popup.index_pressed.connect(_on_mode_selected)
-
+	update_view_metrics()
+	
+func update_view_metrics() -> void:
+	var vp_size = get_viewport_rect().size
+	var cell_w = vp_size.x / float(grid_width)
+	var cell_h = vp_size.y / float(grid_height)
+	cell_size = min(cell_w, cell_h)
 func _on_mode_selected(index):
 	game_mode = index
 	match game_mode: 
@@ -327,5 +333,5 @@ func _on_scale_slider_value_changed(value: float) -> void:
 	cell_size = new_cell_size
 	
 	current_grid = new_current_grid
-	
+	update_view_metrics()
 	queue_redraw()
